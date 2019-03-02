@@ -15,7 +15,6 @@ import { TopnavComponent } from './components/topnav/topnav.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
-import { SalesComponent } from './transactions/sales/sales.component';
 
 @NgModule({
     imports: [
@@ -30,6 +29,6 @@ import { SalesComponent } from './transactions/sales/sales.component';
         MatListModule,
         TranslateModule
     ],
-    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent, SalesComponent]
+    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent]
 })
 export class LayoutModule {}

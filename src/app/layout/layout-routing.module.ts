@@ -19,6 +19,10 @@ const routes: Routes = [
             {
                 path: 'leads',
                 loadChildren: './leads/leads.module#LeadsModule'
+            },
+            {
+                path: 'transactions',
+                loadChildren: './transactions/transactions.module#TransactionsModule'
             }
         ]
     }

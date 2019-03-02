@@ -19,5 +19,8 @@ export interface Customer {
     route: string;
     updatedAt: string;
     updatedBy: string;
-    user: User;
+}
+
+export interface Customers {
+    Customers: Customer[];
 }

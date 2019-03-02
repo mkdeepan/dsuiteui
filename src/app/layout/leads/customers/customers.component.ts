@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { Customer } from 'src/app/interfaces/customer';
+import { Customers, Customer } from 'src/app/interfaces/customer';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -10,24 +10,17 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class CustomersComponent implements OnInit {
 
-  displayedColumns = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<CustomerData>;
+  displayedColumns = ['customerName', 'alias', 'route'];
+  dataSource: MatTableDataSource<Customer>;
 
-  //mywork
-  customerList: any;
+  customerList: Customer[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private service: CommonService) {
-      // Create 100 Customers
-      const users: CustomerData[] = [];
-      for (let i = 1; i <= 100; i++) {
-          users.push(createNewUser(i));
-      }
-
-      // Assign the data to the data source for the table to render
-      this.dataSource = new MatTableDataSource(users);
+    this.customerList = [{address:"Chennai",alias:"ABC",city:"Chennai",contactNo:999999999,contactNo1:9999990999,createdAt:"23-01-2014",createdBy:"Deepan",customerName:"ABC and CO",customerType:"Retailer",firstName:"Apple",id:12,isActive:1,isDelete:0,lastName:"Co",pincode:600037,route:"PPN",updatedAt:"25-01-2014",updatedBy:"Deepan"},{address:"Chennai",alias:"ABC",city:"Chennai",contactNo:999999999,contactNo1:9999990999,createdAt:"23-01-2014",createdBy:"Deepan",customerName:"ABC and CO",customerType:"Retailer",firstName:"Apple",id:12,isActive:1,isDelete:0,lastName:"Co",pincode:600037,route:"PPN",updatedAt:"25-01-2014",updatedBy:"Deepan"}];
+    this.dataSource = new MatTableDataSource(this.customerList);
   }
 
   ngOnInit() {
@@ -35,12 +28,11 @@ export class CustomersComponent implements OnInit {
       this.dataSource.sort = this.sort;
       
       //mywork
-      this.service.httpGet().subscribe(data => {
-        this.customerList = data;
-        console.log(data);
-        console.log(this.customerList);
-      }
-    );
+      // this.service.httpGet().subscribe(data => {
+      //   this.customerList = data;
+      //   console.log(data);
+      //   console.log(this.customerList);
+      // });
   }
 
   applyFilter(filterValue: string) {
@@ -53,62 +45,3 @@ export class CustomersComponent implements OnInit {
   }
 }
 
-/** Constants used to fill up our data base. */
-const COLORS = [
-  'maroon',
-  'red',
-  'orange',
-  'yellow',
-  'olive',
-  'green',
-  'purple',
-  'fuchsia',
-  'lime',
-  'teal',
-  'aqua',
-  'blue',
-  'navy',
-  'black',
-  'gray'
-];
-const NAMES = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth'
-];
-
-export interface CustomerData {
-  
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): CustomerData {
-  const name =
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-      ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-      '.';
-
-  return {
-      id: id.toString(),
-      name: name,
-      progress: Math.round(Math.random() * 100).toString(),
-      color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
-}
